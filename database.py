@@ -25,7 +25,7 @@ while i<1:
 	print "Gestor de base de datos desde PYTHON \n Ejercicion de evaluacion para ISEP \n Autor: Edgar Allen\n"
 	#time.sleep(2)
 	print "Por favor Seleccione la Opcion a Realizar luego precione Enter\n"
-	print "1.-Consultar desde una base de datos\n2.-Cargar Datos \n3.-Eliminar un Registro\n4.-Actualizar un Registro\n5.-Salir\n"
+	print "0.-Consultar desde una base de datos\n1.-Consultar una base de datos\n2.-Cargar Datos \n3.-Eliminar un Registro\n4.-Actualizar un Registro\n5.-Salir\n"
 	confirmacion= raw_input("Opcion:")
 	conf=int(confirmacion)
 #----------------------------------------------------------------------------
@@ -37,6 +37,14 @@ while i<1:
 #----------------------------------------------------------------------------
 	elif conf ==1:
 		print "CARGANDO INFORMACION A LA BASE DE DATOS\nConsultar Usuarios"
+		conexion=psycopg2.connect(host=Hst,database=Db,user=Usr,password=Psw)
+		cur= conexion.cursor()
+		cur.execute("SELECT nombre, apellido FROM prueba")
+		for nombre,apellido in cur.fetchall():
+			print nombre, apellido 
+		conexion.close()
+
+
 
 #----------------------------------------------------------------------------		
 	elif conf ==2:
