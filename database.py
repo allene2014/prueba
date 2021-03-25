@@ -28,12 +28,16 @@ while i<1:
 	print "1.-Consultar desde una base de datos\n2.-Cargar Datos \n3.-Eliminar un Registro\n4.-Actualizar un Registro\n5.-Salir\n"
 	confirmacion= raw_input("Opcion:")
 	conf=int(confirmacion)
-
-	if conf == 1:
+#----------------------------------------------------------------------------
+	if conf == 0:
 
 		listardb="psql --host " + Hst + " --port 5432 --username 'postgres' -l"
 		os.system(listardb)
 		print "....prueba"
+#----------------------------------------------------------------------------
+	elif conf ==1:
+		print "CARGANDO INFORMACION A LA BASE DE DATOS\nConsultar Usuarios"
+
 #----------------------------------------------------------------------------		
 	elif conf ==2:
 		print "CARGANDO INFORMACION A LA BASE DE DATOS\nAGREGAR USUARIO"
@@ -95,8 +99,8 @@ while i<1:
 		dusr=raw_input("Usuario a Actualizar:\n")
 		nwd=raw_input("Actualizar Nombre\n:")
 
-		query="UPDATE prueba SET nombre="+nwd+ "WHERE id=" +dusr 
-		cur.execute(query)
+		query="UPDATE prueba SET nombre=%s WHERE id= %s"
+		cur.execute(query,(nwd,dusr))
 		conexion.commit()
 
 		cur.execute("SELECT nombre, apellido FROM prueba")
